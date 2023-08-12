@@ -46,7 +46,9 @@
         "ctime": "cpp",
         "map": "cpp",
         "regex": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
