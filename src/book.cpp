@@ -62,24 +62,24 @@
         return this->count;
     }
 
-    int Book::createFile() {
+    void Book::createFile() {
         std::string path = "books/" + this->name + ".txt";
 
         if(this->name == "catalog" || this->name == "prices") { // these names are used already
             std::cout << "Choose a different name for the book!\n";
-            return -1;
+            return;
         }
 
         if(access(path.c_str(), F_OK) != -1) { // check if filename is already used
             std::cout << "The book already exists! You don't need to add it again!\n";
-            return -2;
+            return;
         }
 
         std::ofstream fout(path.c_str()); // make the new .txt file
 
         if(!fout) { // file could't be created / opened / etc
             fprintf(stderr, "Error: File couldn't be created. Please try again!\n");
-            return -3;
+            return;
         }
 
         fout << "Id: " << this->id << "\nBook name: " + this->name + "\nAuthor: " + this->author
@@ -98,26 +98,24 @@
         */
 
         fout.close();
-        return 1;
+        return;
     }
 
-    int Book::destroyFile() {
+    void Book::destroyFile() {
         std::string path = "books/" + this->name + ".txt";
 
         if(this->name == "catalog" || this->name == "prices") {
             std::cout << "Choose a different name for the book!\n";
-            return -1;
+            return;
         }
 
         if(access(path.c_str(), F_OK) == -1) {
             std::cout << "The book doesn't even exist lol!\n";
-            return -2;
+            return;
         }
 
         std::string command = "cd books; rm " + this->name + ".txt; cd -";
         system(command.c_str());
-
-        return 1;
     }
 
     // Book::~Book() {

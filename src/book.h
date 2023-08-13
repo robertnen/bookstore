@@ -21,8 +21,8 @@
             int getId();           // gets id
             int getCount();        // gets count
 
-            int createFile();      // creates a .txt file for the book. It returns 1 if OK, negative for specific errors
-            int destroyFile();     // destroys a .txt file of a book. It returns 1 if OK, negative for specific errors
+            void createFile();      // creates a .txt file for the book
+            void destroyFile();     // destroys a .txt file of a book
 
             // ~Book();
     };
