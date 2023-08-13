@@ -49,6 +49,10 @@
         this->id = id;
     }
 
+    std::string Book::getName() {
+        return this->name;
+    }
+
     // Book::~Book() {
     //     static int destroyCounter = 0;
     //     if(!destroyCounter++) std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f\n";

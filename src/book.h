@@ -16,6 +16,8 @@
             void addToCatalog();
             void setId(int id);
 
+            std::string getName();
+
             // ~Book();
     };
 
