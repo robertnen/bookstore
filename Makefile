@@ -1,8 +1,8 @@
 # I used "Simple makefile generator CP v2.5". It is amazing tbh.
 
-OBJS	= main.o menu.o book.o
-SOURCE	= src/main.cpp src/menu.cpp src/book.cpp
-HEADER	= src/menu.h src/book.h
+OBJS	= main.o menu.o book.o catalog.o
+SOURCE	= src/main.cpp src/menu.cpp src/book.cpp src/catalog.cpp
+HEADER	= src/menu.h src/book.h src/catalog.h
 OUT	= bookstore
 CC	 = g++
 FLAGS	 = -g3 -c -Wall
@@ -22,6 +22,9 @@ menu.o: src/menu.cpp
 
 book.o: src/book.cpp
 	$(CC) $(FLAGS) src/book.cpp -std=c++17
+
+catalog.o: src/catalog.cpp
+	$(CC) $(FLAGS) src/catalog.cpp -std=c++17
 
 clean:
 	rm -f $(OBJS) $(OUT)

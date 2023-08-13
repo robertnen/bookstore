@@ -12,8 +12,8 @@
         while(time(0) < timeToGet);   //waiting for the seconds to pass
     }
 
-    std::string Menu::welcome() {
-        return this->sWelcome;
+    void Menu::welcome() {
+        std::cout << this->sWelcome + "\n";
     }
 
     void Menu::getOptions() {

@@ -18,7 +18,7 @@
                                             "5. Loan book\n"};
             short choice;
         public:
-            std::string welcome();
+            void welcome();
             void getOptions();
     };
 

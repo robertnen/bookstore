@@ -5,7 +5,7 @@
 
     class Book {
         private:
-            int year = 1970, count = 1;
+            int year = 1970, count = 1, id = 0;
             std::string name = "Lorem ipsum", author = "Lucky8boy", description = "Some cool description!";
         public:
             Book(int year, int count, std::string name, std::string author, std::string description);
@@ -14,8 +14,9 @@
 
             void displayBook();
             void addToCatalog();
+            void setId(int id);
 
-            ~Book();
+            // ~Book();
     };
 
 #endif

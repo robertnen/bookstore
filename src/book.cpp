@@ -36,14 +36,21 @@
     }
 
     void Book::addToCatalog() {
-        std::ofstream fout("books/catalog.txt");
-        if(!fout) std::cout << "welp\n";
-        fout << "Hello World\n";
+        std::ofstream fout("books/catalog.txt", std::ios::app);
+        if(!fout) {
+            system("mkdir books; cd books; touch catalog.txt; cd -");
+            std::cout << "Added catalog.txt because someone messed up wtf.\n";
+        }
+        fout << this->id << " " << this->count << " " + this->name + "\n";
         fout.close();
     }
 
-    Book::~Book() {
-        static int destroyCounter = 0;
-        if(!destroyCounter++) std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f\n";
-        else std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f x" << destroyCounter <<'\n';
+    void Book::setId(int id) {
+        this->id = id;
     }
+
+    // Book::~Book() {
+    //     static int destroyCounter = 0;
+    //     if(!destroyCounter++) std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f\n";
+    //     else std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f x" << destroyCounter <<'\n';
+    // }
