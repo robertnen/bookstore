@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstring>
 #include <iomanip>
 
     Catalog::Catalog() {
@@ -104,5 +105,32 @@
             return;
         }
 
-        fout.close();
+        double newPrice = 0; // at first it may be free, idk lol
+
+        char buffer[1000];
+        std::string str;
+
+        bool isOk = false;
+
+        while(!isOk) {
+
+            std::cout << "Choose the price the book will have: ";
+
+            fgets(buffer, 1000, stdin); // user input without new line character
+            buffer[strlen(buffer) - 1] = '\0';
+
+            str = buffer;
+
+            try { // trying to convert the string to double
+                newPrice = std::stod(str);
+                isOk = true;
+            } catch (...) { // the user is somehow unable to write a number down wtf
+                fprintf(stderr, "The price is not valid! Please try again with a number only!\n");
+            }
+        }
+
+        fout << ++this->numOfBooks << " " << newPrice << '\n'; // adding all the changes at the end
+        fout.close();                                          // cuz there may be errors along the road
+
+        this->updateCatalog();                                 // saves the new book and updates the catalog
     }
