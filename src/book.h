@@ -7,20 +7,22 @@
         private:
             int year = 1970, count = 1, id = 0;
             std::string name = "Lorem ipsum", author = "Lucky8boy", description = "Some cool description!";
+
         public:
             Book(int year, int count, std::string name, std::string author, std::string description);
             Book(int year, int count, std::string name, std::string author);
             Book(int year, int cuont, std::string name);
 
-            void displayBook();
-            void addToCatalog();
-            void setId(int id);
+            void displayBook();    // show all informations about a book
+            void addToCatalog();   // adds a book to the catalog (I saw later that this function is useless for me)
+            void setId(int id);    // sets an id for a book
 
-            std::string getName();
-            int getId();
-            int getCount();
+            std::string getName(); // gets name
+            int getId();           // gets id
+            int getCount();        // gets count
 
-            void createFile();
+            int createFile();      // creates a .txt file for the book. It returns 1 if OK, negative for specific errors
+            int destroyFile();     // destroys a .txt file of a book. It returns 1 if OK, negative for specific errors
 
             // ~Book();
     };
