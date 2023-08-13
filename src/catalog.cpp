@@ -84,5 +84,25 @@
     }
 
     void Catalog::addBook(Book book) {
-        if(this->searchBook(book.getName()) != -1)
+        if(this->searchBook(book.getName()) != -1) { // the book already exists
+            std::cout << "The book already exists!\n";
+            return;
+        }
+
+        Trio aux;
+        aux.count = book.getCount();
+        aux.id = book.getId();
+        aux.name = book.getName();
+
+        this->data.push_back(aux);
+        this->mapData[aux.name] = aux.id;
+
+        std::ofstream fout("books/prices.txt", std::ios::app); // appending the file
+
+        if(!fout) {
+            fprintf(stderr, "'books/prices.txt' is missing! The program is not going further!\n");
+            return;
+        }
+
+        fout.close();
     }
