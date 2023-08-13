@@ -82,3 +82,7 @@
                       << std::setw(MAX_DIGITS) << book.count
                       << " " + book.name + "\n";
     }
+
+    void Catalog::addBook(Book book) {
+        if(this->searchBook(book.getName()) != -1)
+    }

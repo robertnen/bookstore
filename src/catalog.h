@@ -4,6 +4,7 @@
     #include <iostream>
     #include <list>
     #include <unordered_map>
+    #include "book.h"
 
     #define MAX_DIGITS 3 // how many digits an Id can have (in this case -1 < Id < 1000)
 
@@ -15,6 +16,12 @@
     /*
         The "catalog" is made of a list and an unordered map. The list is used
         to containg everything, and the map is used to find easier some info.
+        Warnings:
+        1. The price is not on the catalog! Maybe the owner of the book-
+        store wants to change the price of a book sometimes. The price is in
+        the 'books/prices.txt' file.
+        2. The year/author/description will not be in the catalog. It will be
+        another .txt file for each book.
     */
 
     class Catalog {
@@ -27,6 +34,8 @@
             int searchBook(std::string name); // it returns the id of the search book or -1 if not found
             void updateCatalog(); // it rewrites the catalog (maybe major changes)
             void showCatalog(); // writes all the catalog to the terminal
+            void addBook(Book book); // adds a book to the catalog
+            void removeBook(Book book); // removes a book from the catalog
     };
 
 #endif
