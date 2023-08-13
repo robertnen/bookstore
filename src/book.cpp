@@ -53,6 +53,23 @@
         return this->name;
     }
 
+    int Book::getId() {
+        return this->id;
+    }
+
+    int Book::getCount() {
+        return this->count;
+    }
+
+    void Book::createFile() {
+        std::string path = "books/" + this->name + ".txt";
+
+        if(this->name == "catalog" || this->name == "prices") {
+            std::cout << "Choose a different name for the book!\n";
+            return;
+        }
+    }
+
     // Book::~Book() {
     //     static int destroyCounter = 0;
     //     if(!destroyCounter++) std::cout << "The book \"" << this->name << "\" was destroyed by the admin.\n<Lucky8boy>: f\n";

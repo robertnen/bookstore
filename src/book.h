@@ -17,6 +17,10 @@
             void setId(int id);
 
             std::string getName();
+            int getId();
+            int getCount();
+
+            void createFile();
 
             // ~Book();
     };
