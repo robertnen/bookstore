@@ -22,7 +22,9 @@ int main() {
     Catalog catalog;
     // catalog.showCatalog();
     // catalog.searchBook("Very cool name");
+    book1.setId(423);
     catalog.updateCatalog();
+    catalog.addBook(book1);
 
     return 0;
 }
