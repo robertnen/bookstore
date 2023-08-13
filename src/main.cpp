@@ -18,7 +18,9 @@ int main() {
     // book1.addToCatalog();
 
     Catalog catalog;
-    catalog.showCatalog();
+    // catalog.showCatalog();
+    // catalog.searchBook("Very cool name");
+    catalog.updateCatalog();
 
     return 0;
 }
