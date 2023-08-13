@@ -1,7 +1,6 @@
 #ifndef CATALOG_H
 #define CATALOG_H
 
-    #include <iostream>
     #include <list>
     #include <unordered_map>
     #include "book.h"
@@ -27,8 +26,10 @@
     class Catalog {
         private:
             std::unordered_map<std::string, int> mapData;
+            std::unordered_map<int, double> prices;
             std::list<Trio> data;
             int numOfBooks;
+
         public:
             Catalog();                                  // it gets from the 'books/catalog.txt' all the data the bookstore has
             int searchBook(std::string name);           // it returns the id of the search book or -1 if not found

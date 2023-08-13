@@ -4,6 +4,7 @@
 #include <sstream>
 #include <cstring>
 #include <iomanip>
+#include <unistd.h>
 
     Catalog::Catalog() {
         std::ifstream fin("books/catalog.txt");
@@ -75,6 +76,23 @@
             fout << std::setw(MAX_DIGITS) << book.id << " "
                  << std::setw(MAX_DIGITS) << book.count
                  << " " + book.name + "\n";
+
+        fout.close(); // I totally forgot about this...
+        fout.open("books/prices.txt");
+        if(!fout) {
+            fprintf(stderr, "\n\n\nError: 'books/prices.txt' is missing, the program stopped!\n");
+            exit(1);
+        }
+
+        /*
+            Prices.txt format:
+            | id price |
+        */
+
+        for(auto book : this->prices)
+            fout << std::setw(MAX_DIGITS) << book.first << " " << book.second << "\n";
+
+        fout.close();
     }
 
     void Catalog::showCatalog() {
@@ -105,12 +123,12 @@
             return;
         }
 
+        fout.close();
+
         double newPrice = 0; // at first it may be free, idk lol
-
         char buffer[1000];
-        std::string str;
-
         bool isOk = false;
+        std::string str;
 
         while(!isOk) {
 
@@ -126,11 +144,32 @@
                 isOk = true;
             } catch (...) { // the user is somehow unable to write a number down wtf
                 fprintf(stderr, "The price is not valid! Please try again with a number only!\n");
-            }
+              }
         }
 
-        fout << ++this->numOfBooks << " " << newPrice << '\n'; // adding all the changes at the end
-        fout.close();                                          // cuz there may be errors along the road
-
-        this->updateCatalog();                                 // saves the new book and updates the catalog
+        ++this->numOfBooks;
+        this->prices[book.getId()] = newPrice;    // | id price | - format in price.txt
+        this->mapData[book.getName()] = book.getId();
+        this->updateCatalog();              // saves the new book and updates the catalog
     }
+
+    void Catalog::removeBook(Book book) {
+        if(!prices.count(book.getId())) {
+            fprintf(stderr, "Book doesn't exist!\n");
+            return;
+        }
+
+        prices.erase(book.getId());
+
+        std::list<Trio>::iterator aBook = this->data.begin(); // the only way I know how to erase with an iterator
+        for(; aBook != this->data.end(); aBook++)
+            if((*aBook).name == book.getName()) {
+                this->data.erase(aBook);
+                break;
+            }
+
+        --this->numOfBooks;
+        this->updateCatalog();
+    }
+
+    // TODO: create / remove the book file
