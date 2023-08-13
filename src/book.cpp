@@ -92,7 +92,7 @@
             | Book name: Some cool book              |
             | Author: Lucky8boy                      |
             | Year: 2003                             |
-            | Count: 3                               |
+            | Count: 20                              |
             | Description: A very simple description.|
             |________________________________________|
         */
