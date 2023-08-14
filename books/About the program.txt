@@ -1,0 +1,6 @@
+Id: 3
+Book name: About the program
+Author: Lucky8boy
+Year: 2023
+Count: 999
+Description: NEVER DELETE THE 'catalog.txt' NOR THE 'prices.txt'. They are used for this program and deleting them causes errors which will stop the program. If one of them (or both) is missing, you have to set a directory called 'books' and inside to .txt files called 'catalog.txt' and 'prices.txt'. Good luck!

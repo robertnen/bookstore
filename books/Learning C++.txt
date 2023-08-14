@@ -1,0 +1,6 @@
+Id: 2
+Book name: Learning C++
+Author: 
+Year: 2010
+Count: 14
+Description: I just found the book
