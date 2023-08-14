@@ -32,11 +32,16 @@
 
         public:
             Catalog();                                  // it gets from the 'books/catalog.txt' all the data the bookstore has
-            int searchBook(std::string name);           // it returns the id of the search book or -1 if not found
-            void updateCatalog();                       // it rewrites the catalog (maybe major changes)
             void showCatalog();                         // writes all the catalog to the terminal
+            void updateCatalog();                       // it rewrites the catalog (maybe major changes)
             void addBook(Book book);                    // adds a book to the catalog
+            bool searchBook(int id);                    // it returns the id of the search book or -1 if not found
             void removeBook(Book book);                 // removes a book from the catalog
+            int searchBook(std::string name);           // it returns the id of the search book or -1 if not found
+
+            int getNumOfBooks();
+            void buyBook(int id);
+            void buyBook(std::string name);
     };
 
 #endif

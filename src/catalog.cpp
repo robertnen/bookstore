@@ -45,6 +45,24 @@
             this->mapData[aux.name] = aux.id;
 
             ss.str("");
+            ss.clear();
+        }
+
+        fin.close();
+        fin.open("books/prices.txt");
+
+        if(!fin) {
+            fprintf(stderr, "'books/prices.txt' is missing, the program stopped!\n");
+            exit(1);
+        }
+
+        while(std::getline(fin, str)) {
+            ss << str;
+            std::cout << "|" + str  + "|\n|" + ss.str() + "|\n";
+            ss >> pos >> this->prices[pos]; // | id price | - each line has this format
+            std::cout << pos << " " << this->prices[pos] << "\n";
+            ss.str("");
+            ss.clear();
         }
 
         fin.close();
@@ -53,6 +71,12 @@
     int Catalog::searchBook(std::string name) {
         if(this->mapData.count(name)) return mapData[name];
         return -1;
+    }
+
+    bool Catalog::searchBook(int id) {
+        for(auto& book : this->mapData)
+            if(book.second == id) return true;
+        return false;
     }
 
     void Catalog::updateCatalog() {
@@ -151,15 +175,20 @@
         this->prices[book.getId()] = newPrice;    // | id price | - format in price.txt
         this->mapData[book.getName()] = book.getId();
         this->updateCatalog();              // saves the new book and updates the catalog
+
+        book.createFile();
     }
 
     void Catalog::removeBook(Book book) {
-        if(!prices.count(book.getId())) {
+        if(!this->prices.count(book.getId()) || !this->mapData.count(book.getName())) {
             fprintf(stderr, "Book doesn't exist!\n");
             return;
         }
 
-        prices.erase(book.getId());
+        // removing from the object so I can update it
+
+        this->mapData.erase(book.getName());
+        this->prices.erase(book.getId());
 
         std::list<Trio>::iterator aBook = this->data.begin(); // the only way I know how to erase with an iterator
         for(; aBook != this->data.end(); aBook++)
@@ -170,6 +199,32 @@
 
         --this->numOfBooks;
         this->updateCatalog();
+
+        book.destroyFile();
     }
 
-    // TODO: create / remove the book file
+    void Catalog::buyBook(int id) {
+        std::list<Trio>::iterator aBook = this->data.begin();
+        for(; aBook != this->data.end(); aBook++)
+            if((*aBook).id == id) break;
+
+        if((*aBook).count == 1) {
+            Book book(id, 1, (*aBook).name);
+            this->removeBook(book);
+            std::cout << "Last copy of the book " + book.getName() + " was sold!\n";
+            this->updateCatalog();
+            return;
+        }
+
+        (*aBook).count--;
+        this->updateCatalog();
+
+    }
+
+    void Catalog::buyBook(std::string name) {
+        this->buyBook(this->mapData[name]);
+    }
+
+    int Catalog::getNumOfBooks() {
+        return this->numOfBooks;
+    }
