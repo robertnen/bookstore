@@ -45,6 +45,6 @@ somewhere in the comments. Have fun!
 ## Save Menu
 ![Save menu](img/Save_menu.png)
 
-[^1]: For windows you need something like GNU Make to run it. It won't run without it.
+[^1]: For Windows you need something like GNU Make to run it. It won't run without it.
 [^2]: I don't own anything related to the GNU Make. I am not getting any money from it, nor from the repo.
 [^3]: I don't own anything related to the Valgrind. I am not getting any money from it, nor from the repo.
