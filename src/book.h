@@ -9,22 +9,26 @@
             std::string name = "Lorem ipsum", author = "Lucky8boy", description = "Some cool description!";
 
         public:
-            Book(int year, int count, std::string name, std::string author, std::string description);
-            Book(int year, int count, std::string name, std::string author);
-            Book(int year, int cuont, std::string name);
+            Book(int count, std::string name);                                                        // (maybe someone will need it)
+            Book(int id, int count, std::string name);                                                // I use this for the catalog
+            Book(int year, int count, std::string name, std::string author);                          // (maybe someone will need it)
+            Book(int year, int count, std::string name, std::string author, std::string description); // I use this for the menu
 
-            void displayBook();    // show all informations about a book
-            void addToCatalog();   // adds a book to the catalog (I saw later that this function is useless for me)
-            void setId(int id);    // sets an id for a book
+            void displayBook();             // show all informations about a book
+            void addToCatalog();            // add a book file              (maybe someone will need it)
 
-            std::string getName(); // gets name
-            int getId();           // gets id
-            int getCount();        // gets count
+            void setId(int id);             // sets an id for a book
+            void setCount(int count);       // sets the number of copies    (maybe someone will need it)
+            void setName(std::string name); // sets the name of the book    (maybe someone will need it)
 
-            void createFile();      // creates a .txt file for the book
-            void destroyFile();     // destroys a .txt file of a book
+            int getId();                    // gets id
+            int getCount();                 // gets count
+            std::string getName();          // gets name
 
-            // ~Book();
+            void createFile();              // creates a .txt file for the book
+            void destroyFile();             // destroys a .txt file of a book
+
+            // ~Book();                     // this is just an easter egg, still very funny for me lol
     };
 
 #endif

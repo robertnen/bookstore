@@ -18,12 +18,18 @@
         this->description = "-";
     }
 
-    Book::Book(int year, int count, std::string name) {
-        this->year = year;
+    Book::Book(int count, std::string name) {
+        this->year = -1;
         this->count = count;
         this->name = name;
         this->author = "-";
         this->description = "-";
+    }
+
+    Book::Book(int id, int count, std::string name) {
+        this->id = id;
+        this->count = count;
+        this->name = name;
     }
 
     void Book::displayBook() {
@@ -48,6 +54,14 @@
 
     void Book::setId(int id) {
         this->id = id;
+    }
+
+    void Book::setCount(int count) {
+        this->count = count;
+    }
+
+    void Book::setName(std::string name) {
+        this->name = name;
     }
 
     std::string Book::getName() {
