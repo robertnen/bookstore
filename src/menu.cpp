@@ -1,7 +1,7 @@
     #include "menu.h"
 
     bool isValid(std::string str) {
-        std::regex patttern("^[12345]");
+        std::regex patttern("^[12345]"); // string starts with either 1, 2,3, 4 or 5
         return std::regex_search(str, patttern);
     }
 
@@ -15,10 +15,16 @@
         std::cout << this->sWelcome + "\n";
     }
 
+    int Menu::getChoice() {
+        return this->choice;
+    }
+
     void Menu::getOptions() {
         int i = 0, timeout = 3;
         char buffer[1000];
         std::cout << "Choose an option from the list:\n";
+
+        // showing the menu
         for(; i < this->option; i++) std::cout << this->sOptions[i];
 
         std::cout << "Your choice: ";
@@ -29,12 +35,12 @@
 
         std::string str(buffer);
 
-        while(!isValid(buffer)) {
+        while(!isValid(buffer)) { // while the input is not valid
             std::cout << "Please choose an option between 1 and 5!\n";
             delaySeconds(1);
             for(i = timeout; i > 0; i--) {
-                std::cout << "Wait " << i << "s!\r";
-                std::cout.flush();
+                std::cout << "Wait " << i << "s!\r"; // reset the cursor
+                std::cout.flush(); // refresh the terminal
                 delaySeconds(1);
             }
             std::cout << "\rTry again: ";
@@ -47,11 +53,7 @@
             buffer[strlen(buffer) - 1] = '\0';
         }
 
-        this->choice = (short)(buffer[0] - '0');
-    }
-
-    int Menu::getChoice() {
-        return this->choice;
+        this->choice = (short)(buffer[0] - '0'); // get the choice
     }
 
     void Menu::buyBookOption() {
@@ -194,7 +196,7 @@
             count = -1;
         }
 
-        id = catalog.getNumOfBooks() + 1;
+        id = catalog.getNumOfBooks() + 1; // first line contains the last id
 
         Book book(year, count, name, author, description);
         book.setId(id);
@@ -269,7 +271,7 @@
             return;
         }
 
-        Book book(id, -1, name);
+        Book book(id, -1, name); // -1 cuz I don't need the count value
         catalog.removeBook(book);
     }
 
