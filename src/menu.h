@@ -2,8 +2,12 @@
 #define MENU_H
 
     #include <iostream>
+    #include <string>
     #include <cstring>
     #include <regex>
+    #include "catalog.h"
+
+    #define WAITING_TIME 2 // the argument for delaySeconds function
 
     // checks while using regex if a string contains at start 1, 2, 3, 4 or 5
     bool isValid(std::string str);
@@ -20,11 +24,16 @@
                                              "3. Check if book exists\n",
                                              "4. Buy book\n",
                                              "5. Exit\n"};
-            short choice;
+            short choice = -1;
 
         public:
-            void welcome();         // welcome message
-            void getOptions();      // get options menu
+            void welcome();          // welcome message
+            int getChoice();         // returns what user wants
+            void getOptions();       // get options menu
+            void buyBookOption();    // buy a book
+            void addBookOption();    // add a book
+            void removeBookOption(); // remove a book
+            bool searchBookOption(); // search if a book exists
     };
 
 #endif
