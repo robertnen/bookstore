@@ -51,7 +51,7 @@
         fin.close();
         fin.open("books/prices.txt");
 
-        if(!fin) {
+        if(!fin) { // check if file exists
             fprintf(stderr, "'books/prices.txt' is missing, the program stopped!\n");
             exit(1);
         }
@@ -66,15 +66,11 @@
         fin.close();
     }
 
-    int Catalog::searchBook(std::string name) {
-        if(this->mapData.count(name)) return mapData[name];
-        return -1;
-    }
-
-    bool Catalog::searchBook(int id) {
-        for(auto& book : this->mapData)
-            if(book.second == id) return true;
-        return false;
+    void Catalog::showCatalog() {
+        for(auto book : this->data)
+            std::cout << std::setw(MAX_DIGITS) << book.id << " "
+                      << std::setw(MAX_DIGITS) << book.count
+                      << " " + book.name + "\n";
     }
 
     void Catalog::updateCatalog() {
@@ -117,13 +113,6 @@
         fout.close();
     }
 
-    void Catalog::showCatalog() {
-        for(auto book : this->data)
-            std::cout << std::setw(MAX_DIGITS) << book.id << " "
-                      << std::setw(MAX_DIGITS) << book.count
-                      << " " + book.name + "\n";
-    }
-
     void Catalog::addBook(Book book) {
         if(this->searchBook(book.getName()) != -1) { // the book already exists
             std::cout << "The book already exists!\n";
@@ -135,8 +124,8 @@
         aux.id = book.getId();
         aux.name = book.getName();
 
-        this->data.push_back(aux);
-        this->mapData[aux.name] = aux.id;
+        this->data.push_back(aux); // add in the list the book so I can update the catalog
+        this->mapData[aux.name] = aux.id; // and in the mapdata
 
         std::ofstream fout("books/prices.txt", std::ios::app); // appending the file
 
@@ -179,6 +168,12 @@
         book.createFile();
     }
 
+    bool Catalog::searchBook(int id) {
+        for(auto& book : this->mapData)
+            if(book.second == id) return true;
+        return false;
+    }
+
     void Catalog::removeBook(Book book) {
         if(!this->prices.count(book.getId()) || !this->mapData.count(book.getName())) {
             fprintf(stderr, "Book doesn't exist!\n");
@@ -203,6 +198,15 @@
         book.destroyFile();
     }
 
+    int Catalog::searchBook(std::string name) {
+        if(this->mapData.count(name)) return mapData[name];
+        return -1;
+    }
+
+    int Catalog::getNumOfBooks() {
+        return this->numOfBooks;
+    }
+
     void Catalog::buyBook(int id) {
         std::list<Trio>::iterator aBook = this->data.begin();
         for(; aBook != this->data.end(); aBook++)
@@ -223,8 +227,4 @@
 
     void Catalog::buyBook(std::string name) {
         this->buyBook(this->mapData[name]);
-    }
-
-    int Catalog::getNumOfBooks() {
-        return this->numOfBooks;
     }
