@@ -1,7 +1,7 @@
 #include "menu.h"
 #include "book.h"
 #include "catalog.h"
-#include <iostream>
+
 int main() {
 
     Menu menu;
