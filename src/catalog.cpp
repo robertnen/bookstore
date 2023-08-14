@@ -58,9 +58,7 @@
 
         while(std::getline(fin, str)) {
             ss << str;
-            std::cout << "|" + str  + "|\n|" + ss.str() + "|\n";
             ss >> pos >> this->prices[pos]; // | id price | - each line has this format
-            std::cout << pos << " " << this->prices[pos] << "\n";
             ss.str("");
             ss.clear();
         }
@@ -175,6 +173,8 @@
         this->prices[book.getId()] = newPrice;    // | id price | - format in price.txt
         this->mapData[book.getName()] = book.getId();
         this->updateCatalog();              // saves the new book and updates the catalog
+
+        std::cout << "The book " + book.getName() + " was added!\n";
 
         book.createFile();
     }
