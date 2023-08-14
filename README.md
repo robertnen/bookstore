@@ -1,5 +1,8 @@
 ![Bookshelf image](img/bookshelf.png)
 
+# [Wiki](https://github.com/Lucky8boy/bookstore/wiki/Bookstore-Wiki)
+  Full documentation for the program is now in the repo's wiki!
+
 # My Bookstore
   Welcome to my bookstore! Ofc it is not an official one. Made in C++. It works in both Linux and Windows [^1]
 
