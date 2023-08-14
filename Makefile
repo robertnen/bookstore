@@ -3,10 +3,10 @@
 OBJS	= main.o menu.o book.o catalog.o
 SOURCE	= src/main.cpp src/menu.cpp src/book.cpp src/catalog.cpp
 HEADER	= src/menu.h src/book.h src/catalog.h
-OUT	= bookstore
-CC	 = g++
-FLAGS	 = -g3 -c -Wall
-LFLAGS	 =
+OUT		= bookstore
+CC	 	= g++
+FLAGS	= -g3 -c -Wall
+LFLAGS	=
 
 all: $(OBJS)
 	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
@@ -29,17 +29,27 @@ catalog.o: src/catalog.cpp
 clean:
 	rm -f $(OBJS) $(OUT)
 
+valgrind_clean:
+	rm valgrindLog.txt
+
 run: $(OUT)
 	./$(OUT)
 
 debug: $(OUT)
-	valgrind $(OUT)
+	valgrind --log-file=valgrindLog.txt ./$(OUT)
 
 valgrind: $(OUT)
-	valgrind $(OUT)
+	valgrind --log-file=valgrindLog.txt ./$(OUT)
 
 valgrind_leakcheck: $(OUT)
-	valgrind --leak-check=full $(OUT)
+	valgrind --leak-check=full --log-file=valgrindLog.txt ./$(OUT)
 
 valgrind_extreme: $(OUT)
-	valgrind --leak-check=full --show-leak-kinds=all --leak-resolution=high --track-origins=yes --vgdb=yes $(OUT)
+	valgrind --leak-check=full \
+	         --show-leak-kinds=all \
+			 --leak-resolution=high \
+			 --track-origins=yes \
+			 --vgdb=yes \
+			 --verbose \
+			 --log-file=valgrindLog.txt \
+			 ./$(OUT)
