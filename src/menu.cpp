@@ -11,6 +11,7 @@
     }
 
     void Menu::welcome() {
+        system("clear");
         std::cout << this->sWelcome + "\n";
     }
 
@@ -19,6 +20,8 @@
         char buffer[1000];
         std::cout << "Choose an option from the list:\n";
         for(; i < this->option; i++) std::cout << this->sOptions[i];
+
+        std::cout << "Your choice: ";
 
         // user input
         fgets(buffer, 1000, stdin);
@@ -83,7 +86,7 @@
 
         Catalog catalog;
 
-        if(this->choice == 1) { // by name
+        if(this->choice == 2) { // by id
 
             std::cout << "Enter the id of the book: ";
             fgets(buffer, 1000, stdin);
@@ -113,8 +116,9 @@
             catalog.buyBook(id);
             delaySeconds(WAITING_TIME);
             system("clear");
+            this->choice = -1;
             return;
-         } else {
+         } else { // by name
 
             std::cout << "Enter the name of the book: ";
             fgets(buffer, 1000, stdin);
@@ -132,6 +136,7 @@
             catalog.buyBook(userInput);
             delaySeconds(WAITING_TIME);
             system("clear");
+            this->choice = -1;
             return;
          }
     }
@@ -192,6 +197,7 @@
         id = catalog.getNumOfBooks() + 1;
 
         Book book(year, count, name, author, description);
+        book.setId(id);
 
         system("clear");
         book.displayBook();
@@ -216,8 +222,69 @@
         }
 
         catalog.addBook(book);
-        std::cout << "The book " + book.getName() + " was added!\n";
         delaySeconds(WAITING_TIME);
         system("clear");
+        this->choice = -1;
         return;
+    }
+
+    void Menu::removeBookOption() {
+
+        system("clear");
+
+        std::string name;
+        char buffer[1000];
+        int id;
+
+        Catalog catalog;
+
+        std::cout << "Name of the book: ";
+        fgets(buffer, 1000, stdin);
+        buffer[strlen(buffer) - 1] = '\0';
+
+        if(catalog.searchBook(name = buffer) == -1) {
+            fprintf(stderr, "This book doesn't exist in the bookstore!\n");
+            delaySeconds(WAITING_TIME);
+            system("clear");
+            return;
+        }
+
+        std::cout << "Id: ";
+        fgets(buffer, 1000, stdin);
+        buffer[strlen(buffer) - 1] = '\0';
+
+        try {
+            id = std::stoi(buffer);
+        } catch(...) {
+            std::cout << "The input is not a number. Going back to the menu!\n";
+            delaySeconds(WAITING_TIME);
+            system("clear");
+            return;
+        }
+
+        if(catalog.searchBook(name) != id) {
+            std::cout << "The book has another id. Going back to the menu for security reasons.\n";
+            delaySeconds(WAITING_TIME);
+            system("clear");
+            return;
+        }
+
+        Book book(id, -1, name);
+        catalog.removeBook(book);
+    }
+
+    bool Menu::searchBookOption() {
+
+        std::string name;
+        char buffer[1000];
+        std::cout << "Name of the book: ";
+        fgets(buffer, 1000, stdin);
+        buffer[strlen(buffer) - 1] = '\0';
+        name = buffer;
+
+        Catalog catalog;
+        std::cout << (catalog.searchBook(name) != -1 ? "The book is in the bookstore!\n" : "The book isn't in the bookstore!\n");
+        delaySeconds(WAITING_TIME);
+        system("clear");
+        return catalog.searchBook(name) != -1;
     }
