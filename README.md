@@ -5,10 +5,14 @@
 
 # How to compile
   Type in the terminal the following if it is the first time:
- ```make run```
+ ```sh
+ make run
+```
 
  If you modify something, I recommend you to do this:
- ``` make clean; make run ```
+ ```sh
+ make clean; make run
+```
 
 # How does it work
   Well, to be fast and easy to use, each book will be represented as a .txt file. There is a "Catalog" containing all the books.
