@@ -10,9 +10,9 @@
  If you modify something, I recommend you to do this:
  ``` make clean; make run ```
 
- # How to use the Makefile
+ # How to use the Makefile [^2]
 
- You need to type in terminal ```make rule_you_want``` in the same level of directory as the **Makefile** file. All *make* commands:
+ You need to type in terminal ```make rule_you_want``` in the same level of directory as the **Makefile** file. All *make* commands: [^3]
  
  |         Command         | Creates the executable | Cleans the objects | Cleans the log | Runs the program | Debug | Simple valgrind | Leak check | All valgrind info |
 |:-----------------------:|:----------------------:|:------------------:|:--------------:|:----------------:|:-----:|:---------------:|:----------:|:-----------------:|
@@ -27,9 +27,11 @@
 
 # Images of the menu
 
-![Main menu](img/Main menu.png)
-![Add book menu](img/Add book menu.png)
-![Buy menu](img/Buy menu.png)
-![Save menu](img/Save menu.png)
+![Main menu](img/Main_menu.png)
+![Add book menu](img/Add_book_menu.png)
+![Buy menu](img/Buy_menu.png)
+![Save menu](img/Save_menu.png)
 
 [^1]: For windows you need something like GNU Make to run it. It won't run without it.
+[^2]: I don't own anything related to the GNU Make. I am not getting any money from it, nor the repo.
+[^3]: I don't own anything related to the Valgrind. I am not getting any money from it, nor the repo.
