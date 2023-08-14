@@ -6,7 +6,7 @@
     class Book {
         private:
             int year = 1970, count = 1, id = 0;
-            std::string name = "Lorem ipsum", author = "Lucky8boy", description = "Some cool description!";
+            std::string name = "Book Class", author = "Lucky8boy", description = "Some cool description!";
 
         public:
             Book(int count, std::string name);                                                        // (maybe someone will need it)

@@ -2,22 +2,6 @@
 #include <fstream>
 #include <unistd.h>
 
-    Book::Book(int year, int count, std::string name, std::string author, std::string description) {
-        this->year = year;
-        this->count = count;
-        this->name = name;
-        this->author = author;
-        this->description = description;
-    }
-
-    Book::Book(int year, int count, std::string name, std::string author) {
-        this->year = year;
-        this->count = count;
-        this->name = name;
-        this->author = author;
-        this->description = "-";
-    }
-
     Book::Book(int count, std::string name) {
         this->year = -1;
         this->count = count;
@@ -30,6 +14,22 @@
         this->id = id;
         this->count = count;
         this->name = name;
+    }
+
+    Book::Book(int year, int count, std::string name, std::string author) {
+        this->year = year;
+        this->count = count;
+        this->name = name;
+        this->author = author;
+        this->description = "-";
+    }
+
+    Book::Book(int year, int count, std::string name, std::string author, std::string description) {
+        this->year = year;
+        this->count = count;
+        this->name = name;
+        this->author = author;
+        this->description = description;
     }
 
     void Book::displayBook() {
@@ -64,16 +64,16 @@
         this->name = name;
     }
 
-    std::string Book::getName() {
-        return this->name;
-    }
-
     int Book::getId() {
         return this->id;
     }
 
     int Book::getCount() {
         return this->count;
+    }
+
+    std::string Book::getName() {
+        return this->name;
     }
 
     void Book::createFile() {
@@ -123,7 +123,7 @@
             return;
         }
 
-        if(access(path.c_str(), F_OK) == -1) {
+        if(access(path.c_str(), F_OK) == -1) { // check if filename exists
             std::cout << "The book doesn't even exist lol!\n";
             return;
         }
