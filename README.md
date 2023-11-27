@@ -4,7 +4,7 @@
   Full documentation for the program is now in the repo's wiki!
 
 # My Bookstore
-  Welcome to my bookstore! Ofc it is not an official one. Made in C++. It works in both Linux and Windows [^1]
+  Welcome to my bookstore! Of course it is not an official one. It is made in C++ and with a bit of help from Makefile. I wondered how does it feel to have a pseudo-database without using anything like SQL. Below are a lot of informations about the program and how to develop further if wanted. There is even a Wiki page about everything you may want to know. It works in both Linux and Windows [^1]
 
 # How to compile
   Type in the terminal the following if it is the first time:
