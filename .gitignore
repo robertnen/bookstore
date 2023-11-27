@@ -5,3 +5,4 @@ bookstore
 books/catalog.txt
 .vscode
 .vscode/*
+**/.vscode/
